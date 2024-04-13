@@ -10,11 +10,12 @@
     </head>
     <body>
         <div class="container-fluid center">
-            <div class="col-md-12 center"> <!-- 使用 Bootstrap 的列和列類別 -->
-                <img src="images/index_0.jpg" alt="Centered Image">
-                <button type="button" class="btn btn-outline-light btn-lg start_but">開始測驗!</button>
+            <div id="main_div"class="col-md-12 center"> <!-- 使用 Bootstrap 的列和列類別 -->
+                <img id="main_img" src="images/index_0.jpg" alt="Centered Image">
+                <button id="str_but" type="button" class="btn btn-light btn-lg start_but" onclick="str_but_cilck()">開始測驗!</button>
             </div>
         </div>
+        <script src="js/main.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -16,17 +16,38 @@ body {
   width: 100vw; /* 设置图像的宽度为整个视口宽度 */
   height: 100vh; /* 设置图像的高度为整个视口高度 */
 }
-
 .center img {
   width: 100%;
   height: 100%;
   max-width: 600px;
 }
-
 .start_but{
   font-family:'Taipei Sans TC', Arial, sans-serif;  
   position: absolute; /* 绝对定位，相对于容器定位 */
   top: 90%; /* 按钮距离容器顶部50%处 */
   left: 50%; /* 按钮距离容器左侧50%处 */
   transform: translate(-50%, -50%); /* 将按钮居中定位 */
+  color: rgb(117, 9, 63);
+}
+.selet_but_div{ 
+  position: absolute; /* 绝对定位，相对于容器定位 */
+  width: 90%;
+  max-width: 600px;
+  top: 70%; /* 按钮距离容器顶部50%处 */
+  left: 50%; /* 按钮距离容器左侧50%处 */
+  transform: translate(-50%, -50%); /* 将按钮居中定位 */
+}
+.selet_but{
+  font-family:'Taipei Sans TC', Arial, sans-serif;  
+  color: rgb(117, 9, 63);
+  background-color: white;
+}
+.progress{
+  position: absolute; /* 绝对定位，相对于容器定位 */
+  width: 90%;
+  max-width: 600px;
+  top: 10%; /* 按钮距离容器顶部50%处 */
+  left: 50%; /* 按钮距离容器左侧50%处 */
+  transform: translate(-50%, -50%); /* 将按钮居中定位 */
+  background-color: gray;
 }
