@@ -13,8 +13,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw; /* 设置图像的宽度为整个视口宽度 */
-  height: 100vh; /* 设置图像的高度为整个视口高度 */
+  width: 100vw; 
+  height: 100vh; 
 }
 .center img {
   width: 100%;
@@ -23,20 +23,20 @@ body {
 }
 .start_but{
   font-family:'Taipei Sans TC', Arial, sans-serif;  
-  position: absolute; /* 绝对定位，相对于容器定位 */
-  top: 90%; /* 按钮距离容器顶部50%处 */
-  left: 50%; /* 按钮距离容器左侧50%处 */
-  transform: translate(-50%, -50%); /* 将按钮居中定位 */
+  position: absolute; 
+  top: 90%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
   color: rgb(117, 9, 63);
   font-size: 30px;
 }
 .selet_but_div { 
-  position: absolute; /* 绝对定位，相对于容器定位 */
+  position: absolute; 
   width: 90%;
   max-width: 550px;
-  top: 70%; 
-  left: 50%; /* 按钮距离容器左侧50%处 */
-  transform: translate(-50%, -50%); /* 将按钮居中定位 */
+  top: 85%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
 }
 .selet_but{
   font-family:'Taipei Sans TC', Arial, sans-serif;  
@@ -46,12 +46,15 @@ body {
   border-radius: 20px;
 }
 .main_text_div{
-  position: absolute; /* 绝对定位，相对于容器定位 */
+  position: absolute; 
   width: 90%;
   max-width: 550px;
-  top: 40%;
-  left: 50%; /* 按钮距离容器左侧50%处 */
-  transform: translate(-50%, -50%); /* 将按钮居中定位 */
+  top: 45%;
+  left: 50%; 
+  transform: translate(-50%, -50%);
+}
+.main_text_div img{
+  max-height: 300px;
 }
 .main_Text{
   font-family:'Taipei Sans TC', Arial, sans-serif;  
@@ -60,11 +63,11 @@ body {
   font-size: 25px;
 }
 ._progress{
-  position: absolute; /* 绝对定位，相对于容器定位 */
+  position: absolute; 
   width: 90%;
   max-width: 550px;
   top: 10%; 
-  left: 50%; /* 按钮距离容器左侧50%处 */
-  transform: translate(-50%, -50%); /* 将按钮居中定位 */
+  left: 50%;
+  transform: translate(-50%, -50%); 
   background-color: gray;
 }

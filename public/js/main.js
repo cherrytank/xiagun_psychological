@@ -2,6 +2,12 @@ var imageIndex = 1;
 var imageArray = [
     "../images/index_1.jpg", "../images/index_2.jpg", "../images/index_3.jpg",
      "../images/index_4.jpg", "../images/index_5.jpg"];
+
+var processIndex = 0;
+var process_1_img_array = [
+    "../images/evo_0.jpg","../images/evo_1.jpg", "../images/evo_2.jpg", "../images/evo_3.jpg",
+];
+
 var type_table = {
     "type_E":0,
     "type_I":0,
@@ -84,14 +90,49 @@ function str_but_click(){
     progress_rate += 9;
 }
 function selet_1_but_click(){
-    count_score(1,question_index/3);
-    console.log(question_index/3);
-    next_page();
+    selet_but_click(1);
 }
 function selet_2_but_click(){
-    count_score(2,question_index/3);
-    next_page();
+    selet_but_click(2);
 }
+function selet_but_click(index){
+    var _question_number = question_index/3;
+    switch(_question_number){
+        case 3:
+            count_score(index,_question_number);
+            remove_page_item();
+            add_mid_img(question_index++,processIndex);
+            add_selet_but(question_index++,question_index++);
+            add_progress(progress_rate);
+            progress_rate += 6;
+            break;
+        case 4:
+            count_score(index,_question_number);
+            remove_page_item();
+            add_mid_img(question_index++,processIndex++);
+            add_selet_but(question_index++,question_index++);
+            add_progress(progress_rate);
+            progress_rate += 6;
+            break;
+        case 5:
+            count_score(index,_question_number);
+            remove_page_item();
+            add_mid_img(question_index++,processIndex++);
+            add_selet_but(question_index++,question_index++);
+            add_progress(progress_rate);
+            progress_rate += 6;
+            break;
+        case 7:
+            break;
+        case 10:
+            break;
+        default:
+            count_score(index,_question_number);
+            next_page();
+            break;
+}
+}
+
 //----------------count_score---------------------
 function count_score(_selet_index,_question_index){
     switch (_question_index) {
@@ -114,10 +155,12 @@ function count_score(_selet_index,_question_index){
                 type_table["type_N"]++;
             }             
             break;
-
+        
+        case 10://TF
+            change_main_image();
         case 2: //TF
         case 6: //TF
-        case 10://TF
+        
             if(_selet_index==1){
                 type_table["type_T"]++;
             }else{
@@ -125,6 +168,7 @@ function count_score(_selet_index,_question_index){
             }  
             break;
         case 1: //JP
+            change_main_image();
         case 4: //JP
             if(_selet_index==1){
                 type_table["type_J"]++;
@@ -139,6 +183,9 @@ function count_score(_selet_index,_question_index){
             }  
             break;
         default:
+            remove_item("main_text");
+            remove_item("selet_but");
+            remove_item("progress");
             for (var key in type_table) {
                 console.log("Key: " + key + ", Value: " + type_table[key]);
             }
@@ -155,13 +202,17 @@ function change_main_image(){
 }
 
 function next_page(){
-    remove_item("main_text");
-    remove_item("selet_but");
-    remove_item("progress");
-    add_main_text(question_index++);
-    add_selet_but(question_index++,question_index++);
-    add_progress(progress_rate);
-    progress_rate += 6;
+    if(question_index < question_string_array.length){
+        remove_page_item();
+        add_main_text(question_index++);
+        add_selet_but(question_index++,question_index++);
+        add_progress(progress_rate);
+        progress_rate += 6;
+    }else{
+        remove_page_item(); 
+        //add final score page
+    }
+    
 }
 
 //----------------item_remove---------------------
@@ -173,12 +224,25 @@ function remove_item(item_id){
         console.log(item_id+"don't exist")
     }
 }
-
+function remove_page_item(){
+    remove_item("main_text");
+    remove_item("selet_but");
+    remove_item("progress"); 
+}
 //----------------item_add---------------------
 function add_itme(newHTML){
     var container = document.getElementById("main_div");
     container.innerHTML += newHTML;
 }
+function add_mid_img(text_index,processIndex){
+    var newHTML =
+    '<div id="main_text" class="main_text_div">'+
+    '<p class="main_Text">'+question_string_array[text_index]+'</p>'+
+    '<img src="'+process_1_img_array[processIndex]+'" alt="sec Image">'+
+    '</div>';
+    add_itme(newHTML)
+}
+
 function add_main_text(text_index){
     var newHTML =
     '<div id="main_text" class="main_text_div">'+
