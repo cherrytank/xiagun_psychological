@@ -2,6 +2,16 @@ var imageIndex = 1;
 var imageArray = [
     "../images/index_1.jpg", "../images/index_2.jpg", "../images/index_3.jpg",
      "../images/index_4.jpg", "../images/index_5.jpg"];
+var type_table = {
+    "type_E":0,
+    "type_I":0,
+    "type_S":0,
+    "type_N":0,
+    "type_T":0,
+    "type_F":0,
+    "type_J":0,
+    "type_P":0,
+};
 var question_index = 0
 var question_string_array =[
     //1
@@ -74,10 +84,67 @@ function str_but_click(){
     progress_rate += 9;
 }
 function selet_1_but_click(){
+    count_score(1,question_index/3);
+    console.log(question_index/3);
     next_page();
 }
 function selet_2_but_click(){
+    count_score(2,question_index/3);
     next_page();
+}
+//----------------count_score---------------------
+function count_score(_selet_index,_question_index){
+    switch (_question_index) {
+        case 3: //EI
+        case 7: //EI
+        case 11: //EI
+            if(_selet_index==1){
+                type_table["type_I"]++;
+            }else{
+                type_table["type_E"]++;
+            }        
+            break;
+
+        case 8: //SN        
+        case 9: //SN
+        case 12: //SN
+            if(_selet_index==1){
+                type_table["type_S"]++;
+            }else{
+                type_table["type_N"]++;
+            }             
+            break;
+
+        case 2: //TF
+        case 6: //TF
+        case 10://TF
+            if(_selet_index==1){
+                type_table["type_T"]++;
+            }else{
+                type_table["type_F"]++;
+            }  
+            break;
+        case 1: //JP
+        case 4: //JP
+            if(_selet_index==1){
+                type_table["type_J"]++;
+            }else{
+                type_table["type_P"]++;
+            }
+        case 5: //JP
+            if(_selet_index==1){
+                type_table["type_P"]++;
+            }else{
+                type_table["type_J"]++;
+            }  
+            break;
+        default:
+            for (var key in type_table) {
+                console.log("Key: " + key + ", Value: " + type_table[key]);
+            }
+            break;
+      }
+
 }
 
 //----------------item_change---------------------
@@ -94,9 +161,8 @@ function next_page(){
     add_main_text(question_index++);
     add_selet_but(question_index++,question_index++);
     add_progress(progress_rate);
-    progress_rate += 9;
+    progress_rate += 6;
 }
-
 
 //----------------item_remove---------------------
 function remove_item(item_id){
@@ -122,7 +188,7 @@ function add_main_text(text_index){
 }
 function add_selet_but(string_index_1,string_index_2){
     var newHTML =
-    '<div id:selet_but class="d-grid gap-2 selet_but_div">'+
+    '<div id="selet_but" class="d-grid gap-2 selet_but_div">'+
     '<button class="btn btn-light selet_but" type="button" onclick="selet_1_but_click()">'+question_string_array[string_index_1]+'</button>'+
     '<button class="btn btn-light selet_but" type="button" onclick="selet_2_but_click()">'+question_string_array[string_index_2]+'</button>'+
     '</div>';
@@ -130,7 +196,7 @@ function add_selet_but(string_index_1,string_index_2){
 }
 function add_progress(value){
     var newHTML =
-    '<div id:progress class="progress _progress" role="progressbar" aria-label="Basic  example" aria-valuenow='
+    '<div id="progress" class="progress _progress" role="progressbar" aria-label="Basic  example" aria-valuenow='
     +value+' aria-valuemin="0" aria-valuemax="100">'+
     '<div class="progress-bar bg-secondary" style="width: '+value+'%'+'"></div>'+
     '</div>';

@@ -43,6 +43,7 @@ body {
   color: rgb(117, 9, 63);
   background-color: white;
   font-size: 20px;
+  border-radius: 20px;
 }
 .main_text_div{
   position: absolute; /* 绝对定位，相对于容器定位 */
