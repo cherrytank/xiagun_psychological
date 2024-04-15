@@ -1,13 +1,17 @@
+//images
 var imageIndex = 1;
 var imageArray = [
     "../images/index_1.jpg", "../images/index_2.jpg", "../images/index_3.jpg",
-     "../images/index_4.jpg", "../images/index_5.jpg"];
-
+    "../images/index_4.jpg", "../images/index_5.jpg"];
+//process_1
 var processIndex = 0;
+var process_1_text_array = [
+    "","欸!?","欸!?欸!?","欸!?欸!?欸!?"
+];
 var process_1_img_array = [
     "../images/evo_0.jpg","../images/evo_1.jpg", "../images/evo_2.jpg", "../images/evo_3.jpg",
 ];
-
+//INFT Table
 var type_table = {
     "type_E":0,
     "type_I":0,
@@ -18,6 +22,7 @@ var type_table = {
     "type_J":0,
     "type_P":0,
 };
+//question
 var question_index = 0
 var question_string_array =[
     //1
@@ -78,7 +83,9 @@ var question_string_array =[
     "那天神奇的感受和愉快的回憶",//N
     
 ]
+//progress_rate and add_rate
 var progress_rate = 0;
+var progress_rate_one_times  = 6;
 
 //----------------but_active---------------------
 function str_but_click(){
@@ -87,7 +94,20 @@ function str_but_click(){
     add_main_text(question_index++);
     add_selet_but(question_index++,question_index++);
     add_progress("0");
-    progress_rate += 9;
+    progress_rate += progress_rate_one_times;
+}
+function continue_click(){
+    if(processIndex < process_1_img_array.length){
+        remove_page_item();
+        remove_item("con_but");
+        add_continue_but_and_img(process_1_text_array[processIndex],processIndex++);
+        add_progress(progress_rate);
+        progress_rate += progress_rate_one_times;
+    }else{
+        remove_item("con_but");
+        next_page();
+    }
+    
 }
 function selet_1_but_click(){
     selet_but_click(1);
@@ -101,26 +121,25 @@ function selet_but_click(index){
         case 3:
             count_score(index,_question_number);
             remove_page_item();
-            add_mid_img(question_index++,processIndex);
+            add_mid_img(question_string_array[question_index++],processIndex);
             add_selet_but(question_index++,question_index++);
             add_progress(progress_rate);
-            progress_rate += 6;
+            progress_rate += progress_rate_one_times;
             break;
         case 4:
             count_score(index,_question_number);
             remove_page_item();
-            add_mid_img(question_index++,processIndex++);
+            add_mid_img(question_string_array[question_index++],processIndex++);
             add_selet_but(question_index++,question_index++);
             add_progress(progress_rate);
-            progress_rate += 6;
+            progress_rate += progress_rate_one_times;
             break;
         case 5:
             count_score(index,_question_number);
             remove_page_item();
-            add_mid_img(question_index++,processIndex++);
-            add_selet_but(question_index++,question_index++);
+            add_continue_but_and_img(process_1_text_array[processIndex],processIndex++);
             add_progress(progress_rate);
-            progress_rate += 6;
+            progress_rate += progress_rate_one_times;
             break;
         case 7:
             break;
@@ -130,7 +149,7 @@ function selet_but_click(index){
             count_score(index,_question_number);
             next_page();
             break;
-}
+    }
 }
 
 //----------------count_score---------------------
@@ -190,7 +209,7 @@ function count_score(_selet_index,_question_index){
                 console.log("Key: " + key + ", Value: " + type_table[key]);
             }
             break;
-      }
+    }
 
 }
 
@@ -207,7 +226,7 @@ function next_page(){
         add_main_text(question_index++);
         add_selet_but(question_index++,question_index++);
         add_progress(progress_rate);
-        progress_rate += 6;
+        progress_rate += progress_rate_one_times;
     }else{
         remove_page_item(); 
         //add final score page
@@ -234,10 +253,23 @@ function add_itme(newHTML){
     var container = document.getElementById("main_div");
     container.innerHTML += newHTML;
 }
-function add_mid_img(text_index,processIndex){
+
+function add_continue_but_and_img(text,processIndex){
     var newHTML =
     '<div id="main_text" class="main_text_div">'+
-    '<p class="main_Text">'+question_string_array[text_index]+'</p>'+
+    '<p class="main_Text" >'+text+'</p>'+
+    '<img src="'+process_1_img_array[processIndex]+'" alt="sec Image">'+
+    '</div>'+
+    '<div id="con_but">'+
+    '<button type="button" class="btn btn-light btn-lg start_but" onclick="continue_click()">下一頁</button>'+
+    '</div>';
+    add_itme(newHTML)
+}
+
+function add_mid_img(text,processIndex){
+    var newHTML =
+    '<div id="main_text" class="main_text_div">'+
+    '<p class="main_Text">'+text+'</p>'+
     '<img src="'+process_1_img_array[processIndex]+'" alt="sec Image">'+
     '</div>';
     add_itme(newHTML)
