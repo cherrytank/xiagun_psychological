@@ -189,7 +189,13 @@ function count_score(_selet_index,_question_index){
             }        
             break;
 
-        case 8: //SN        
+        case 8: //SN
+            if(_selet_index==1){
+                type_table["type_N"]++;
+            }else{
+                type_table["type_S"]++;
+            }             
+            break;        
         case 9: //SN
         case 12: //SN
             if(_selet_index==1){
