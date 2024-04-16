@@ -9,7 +9,8 @@ var process_1_text_array = [
     "","欸!?","欸!?欸!?","欸!?欸!?欸!?"
 ];
 var process_1_img_array = [
-    "../images/evo_0.jpg","../images/evo_1.jpg", "../images/evo_2.jpg", "../images/evo_3.jpg",
+    "../images/evo_0.jpg","../images/evo_1.jpg", "../images/evo_2.jpg", "../images/evo_3.jpg"
+    ,"../images/meet_1.jpg","../images/meet_2.jpg"
 ];
 //INFT Table
 var type_table = {
@@ -97,7 +98,7 @@ function str_but_click(){
     progress_rate += progress_rate_one_times;
 }
 function continue_click(){
-    if(processIndex < process_1_img_array.length){
+    if(processIndex < process_1_img_array.length-2){
         remove_page_item();
         remove_item("con_but");
         add_continue_but_and_img(process_1_text_array[processIndex],processIndex++);
@@ -106,6 +107,9 @@ function continue_click(){
     }else{
         remove_item("con_but");
         next_page();
+        if(processIndex == 4 || processIndex == 7){
+            change_main_image();
+        }
     }
     
 }
@@ -141,9 +145,28 @@ function selet_but_click(index){
             add_progress(progress_rate);
             progress_rate += progress_rate_one_times;
             break;
+        case 6:
+            count_score(index,_question_number);
+            remove_page_item();
+            add_mid_img(question_string_array[question_index++],processIndex++);
+            add_selet_but(question_index++,question_index++);
+            add_progress(progress_rate);
+            progress_rate += progress_rate_one_times;
+            break;
         case 7:
+            count_score(index,_question_number);
+            remove_page_item();
+            add_continue_but_and_img("藍色大貓貓說這裡是由人們對夜市的回憶所形成的地方，而它叫做阿港，是套圈圈攤的老闆。",processIndex++);
+            add_progress(progress_rate);
+            progress_rate += progress_rate_one_times;
             break;
         case 10:
+            count_score(index,_question_number);
+            remove_page_item();
+            add_continue_but_and_Text("藍色大貓貓說這是在現實夜市裡，迷路的人們的記億，他不會攻擊你的!");
+            processIndex++;
+            add_progress(progress_rate);
+            progress_rate += progress_rate_one_times;
             break;
         default:
             count_score(index,_question_number);
@@ -154,6 +177,7 @@ function selet_but_click(index){
 
 //----------------count_score---------------------
 function count_score(_selet_index,_question_index){
+    console.log(_question_index);
     switch (_question_index) {
         case 3: //EI
         case 7: //EI
@@ -176,10 +200,8 @@ function count_score(_selet_index,_question_index){
             break;
         
         case 10://TF
-            change_main_image();
         case 2: //TF
         case 6: //TF
-        
             if(_selet_index==1){
                 type_table["type_T"]++;
             }else{
@@ -194,6 +216,7 @@ function count_score(_selet_index,_question_index){
             }else{
                 type_table["type_P"]++;
             }
+            break;
         case 5: //JP
             if(_selet_index==1){
                 type_table["type_P"]++;
@@ -201,18 +224,36 @@ function count_score(_selet_index,_question_index){
                 type_table["type_J"]++;
             }  
             break;
-        default:
-            remove_item("main_text");
-            remove_item("selet_but");
-            remove_item("progress");
-            for (var key in type_table) {
-                console.log("Key: " + key + ", Value: " + type_table[key]);
-            }
-            break;
     }
 
 }
+function  final_score(){
+    var final_type = "";
+    if(type_table["type_E"]>type_table["type_I"]){
+        final_type += "E";
+    }else{
+        final_type += "I";
+    }
 
+    if(type_table["type_S"]>type_table["type_N"]){
+        final_type += "S";
+    }else{
+        final_type += "N";
+    }
+
+    if(type_table["type_T"]>type_table["type_F"]){
+        final_type += "T";
+    }else{
+        final_type += "F";
+    }
+
+    if(type_table["type_J"]>type_table["type_P"]){
+        final_type += "J";
+    }else{
+        final_type += "P";
+    }
+    return final_type;
+}
 //----------------item_change---------------------
 function change_main_image(){
     var image = document.getElementById("main_img");
@@ -230,8 +271,12 @@ function next_page(){
     }else{
         remove_page_item(); 
         //add final score page
+        for (var key in type_table) {
+            console.log("Key: " + key + ", Value: " + type_table[key]);
+        }
+        console.log(final_score());
+        add_text(final_score());
     }
-    
 }
 
 //----------------item_remove---------------------
@@ -253,7 +298,6 @@ function add_itme(newHTML){
     var container = document.getElementById("main_div");
     container.innerHTML += newHTML;
 }
-
 function add_continue_but_and_img(text,processIndex){
     var newHTML =
     '<div id="main_text" class="main_text_div">'+
@@ -265,7 +309,16 @@ function add_continue_but_and_img(text,processIndex){
     '</div>';
     add_itme(newHTML)
 }
-
+function add_continue_but_and_Text(text){
+    var newHTML =
+    '<div id="main_text" class="main_text_div">'+
+    '<p class="main_Text" >'+text+'</p>'+
+    '</div>'+
+    '<div id="con_but">'+
+    '<button type="button" class="btn btn-light btn-lg start_but" onclick="continue_click()">下一頁</button>'+
+    '</div>';
+    add_itme(newHTML)
+}
 function add_mid_img(text,processIndex){
     var newHTML =
     '<div id="main_text" class="main_text_div">'+
@@ -274,11 +327,17 @@ function add_mid_img(text,processIndex){
     '</div>';
     add_itme(newHTML)
 }
-
 function add_main_text(text_index){
     var newHTML =
     '<div id="main_text" class="main_text_div">'+
     '<p class="main_Text">'+question_string_array[text_index]+'</p>'+
+    '</div>';
+    add_itme(newHTML)
+}
+function add_text(text){
+    var newHTML =
+    '<div id="main_text" class="main_text_div">'+
+    '<p class="main_Text">'+text+'</p>'+
     '</div>';
     add_itme(newHTML)
 }
